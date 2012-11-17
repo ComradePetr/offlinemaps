@@ -1,0 +1,1 @@
+pair<const char*,vector< pair< point<LD>,point<LD> > > > parse(const char*);

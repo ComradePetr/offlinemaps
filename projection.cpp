@@ -1,5 +1,3 @@
-//18.11.12
-
 #include "all.h"
 #include "map-parser.h"
 #include "calc.h"
@@ -10,15 +8,6 @@ const LD INF=1e18,eps=0.08181333387657540019556205937723;
 
 point<LD> v,st;
 LD zone;
-
-inline point<LD> Calculate(int x,int y){
-	static point<LD> A,B;
-	A=point<LD>(x,y);
-	B=st+point<LD>(A^v,A*v);
-	B=rectangularToGeographical(point<LD>(-B.y,B.x),zone);
-	B.x=degToRad(B.x), B.y=degToRad(B.y);
-	return point<LD>(B.y,arctanh(sin(B.x))-eps*arctanh(eps*sin(B.x)));
-}
 
 QImage *inImage,*outImage;
 
@@ -57,9 +46,15 @@ int main(int argc, char *argv[]){
 //	forab(y,top,bottom+1)
 //		forab(x,left,right+1){	
 	int pos=0;
+	point<LD> t1,t2;
 	forn(y,H)
 		forn(x,W){
-			B[pos]=Calculate(x,y);
+			t1=point<LD>(x,y);
+			t2=st+point<LD>(t1^v,t1*v);
+			t2=rectangularToGeographical(point<LD>(-t2.y,t2.x),zone);
+			t2.x=degToRad(t2.x), t2.y=degToRad(t2.y);
+			B[pos]=point<LD>(t2.y,arctanh(sin(t2.x))-eps*arctanh(eps*sin(t2.x)));
+
 			MinX=min(MinX,B[pos].x), MaxX=max(MaxX,B[pos].x);
 			MinY=min(MinY,B[pos].y), MaxY=max(MaxY,B[pos].y);
 			++pos;
