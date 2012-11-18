@@ -1,1 +1,3 @@
-pair<const char*,vector< pair< point<LD>,point<LD> > > > parse(const char*);
+typedef vector< pair< point<int>,point<LD> > > parseOut;
+
+pair<const char*,parseOut> parse(const char*);

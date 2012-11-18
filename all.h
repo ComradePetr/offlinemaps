@@ -13,18 +13,18 @@
 using namespace std;
 
 #include<QtCore>
-#include<QtGui>
 #include<QImage>
 #include<QPoint>
 #include<QColor>
 
 #define pb push_back
 #define mp make_pair
+#define fst first
+#define snd second
 #define forn(i,N) for(int i=0;i<(N);++i)
 #define forab(i,a,b) for(int i=(a);i<(b);++i)
 
 typedef long double LD;
-//typedef float LD;
 typedef long long LL;
 
 inline LD arctanh(LD x){
@@ -45,6 +45,9 @@ struct point{
 	}
 	LD length(){
 		return sqrt(x*x+y*y);
+	}
+	T& operator[](const int &k){
+		return k?y:x;
 	}
 };
 

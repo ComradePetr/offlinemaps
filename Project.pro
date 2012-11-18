@@ -13,4 +13,19 @@ CONFIG += release
 # Input
 SOURCES += calc.cpp \
 			map-parser.cpp \
-			projection.cpp
+			projection.cpp \
+			#Alglib \
+			alglib/alglibinternal.cpp \
+			alglib/alglibmisc.cpp \
+			alglib/ap.cpp \
+			alglib/dataanalysis.cpp \
+			alglib/diffequations.cpp \
+			alglib/fasttransforms.cpp \
+			alglib/integration.cpp \
+			alglib/interpolation.cpp \
+			alglib/linalg.cpp \
+			alglib/optimization.cpp \
+			alglib/solvers.cpp \
+			alglib/specialfunctions.cpp \
+			alglib/statistics.cpp
+

@@ -1,17 +1,18 @@
 #include "all.h"
+#include "map-parser.h"
 
 static const int
 	POINTS_CNT=30,
 	FIRST_STRS=9,
 	LEN=100;
 
-pair<const char*,vector< pair< point<LD>,point<LD> > > > parse(const char *FileName){
+pair<const char*,parseOut> parse(const char *FileName){
 	FILE* file=fopen(FileName,"r");
 
 	char (*S)[LEN]=new char[FIRST_STRS][LEN];
 	forn(i,FIRST_STRS)
 		fgets(S[i],LEN,file);
-	vector< pair< point<LD>,point<LD> > > answer;		
+	parseOut answer;		
 	forn(i,POINTS_CNT){
 		int x,y,wdeg,ldeg;
 		double wmin,lmin;
@@ -21,7 +22,8 @@ pair<const char*,vector< pair< point<LD>,point<LD> > > > parse(const char *FileN
 			break;
 		
 		LD w=wdeg+wmin/60, l=ldeg+lmin/60;
-		answer.pb(mp(point<LD>((LD)x,(LD)y),point<LD>(w,l)));
+		w*=(cw=='N'?+1:-1), l*=(cl=='E'?+1:-1);		
+		answer.pb(mp(point<int>(x,y),point<LD>(w,l)));
 	}
 	
 	int L=strlen(S[2]);
