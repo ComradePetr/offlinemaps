@@ -5,6 +5,10 @@
 #include "interpolation.h"
 using namespace alglib;
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 const LD INF=1e18,eps=0.08181333387657540019556205937723;
 
 point<LD> v,st;
@@ -54,7 +58,15 @@ int main(int argc, char *argv[]){
 	}
 	st=point<LD>(X[0],X[1]), v=point<LD>(X[2],X[3]);
 
-	inImage=new QImage(ImageName);
+
+	FILE *imageFile=fopen(ImageName,"rb");
+	struct stat x;
+	stat(ImageName, &x);
+	uchar *buff=new uchar[x.st_size];
+	fread(buff,sizeof(uchar),x.st_size,imageFile);
+
+	inImage=new QImage();
+	inImage->loadFromData(buff,x.st_size);
 	if(inImage->isNull()){
 		puts("Can't open image");
 		return 0;
@@ -88,8 +100,12 @@ int main(int argc, char *argv[]){
 			++pos;
 		}
 
-	strcpy(strrchr(ImageName,'.'),"-out.jpg");
-	outImage->save(ImageName);
+	srand(time(NULL));
+	char TempName[30];
+	sprintf(TempName,"temp%d.jpg",rand());
+	strcpy(strrchr(ImageName,'.'),"-out.jpg");	
+	outImage->save(TempName);
+	rename(TempName,ImageName);
 
 	return 0;
 }

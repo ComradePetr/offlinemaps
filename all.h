@@ -6,6 +6,7 @@
 #include<cstring>
 #include<cctype>
 #include<cassert>
+#include<ctime>
 
 #include<algorithm>
 #include<vector>
