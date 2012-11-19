@@ -58,19 +58,21 @@ int main(int argc, char *argv[]){
 	}
 	st=point<LD>(X[0],X[1]), v=point<LD>(X[2],X[3]);
 
-
+	struct stat imstat;
+	stat(ImageName,&imstat);
+	int sz=imstat.st_size;
 	FILE *imageFile=fopen(ImageName,"rb");
-	struct stat x;
-	stat(ImageName, &x);
-	uchar *buff=new uchar[x.st_size];
-	fread(buff,sizeof(uchar),x.st_size,imageFile);
+	uchar *buff=new uchar[sz];
+	fread(buff,sizeof(uchar),sz,imageFile);
+	fclose(imageFile);
 
 	inImage=new QImage();
-	inImage->loadFromData(buff,x.st_size);
+	inImage->loadFromData(buff,sz);
 	if(inImage->isNull()){
 		puts("Can't open image");
 		return 0;
 	}
+
 	int W=inImage->width(), H=inImage->height();
 	point<LD> *B=new point<LD>[W*H];
 	outImage=new QImage(W,H,QImage::Format_RGB32);

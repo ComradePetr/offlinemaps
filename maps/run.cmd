@@ -1,5 +1,6 @@
 @echo off
 
+set QT_PLUGIN_PATH=.;%QT_PLUGIN_PATH%
 setlocal enableDelayedExpansion
 
 for %%i in (%1) do (
