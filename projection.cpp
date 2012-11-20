@@ -18,7 +18,9 @@ QImage *inImage,*outImage;
 real_1d_array X,Y;
 real_2d_array Z;
 
-const int CFF[2][4]={{1,0,-1,1},{0,1,1,1}};
+const int
+	CFF[2][4]={{1,0,-1,1},{0,1,1,1}},
+	ITERS_CNT=2;
 
 int main(int argc, char *argv[]){
 	freopen("output.txt","w",stdout);
@@ -43,13 +45,12 @@ int main(int argc, char *argv[]){
 			forn(k,4)
 				Z[2*i+j][k]=LD(CFF[j][k]*(k<2?1:input[i].fst[!(j^(k-2))]));
 		point<LD> t=geographicalToRectangular(input[i].snd,zone);
-		t=point<LD>(t.y,-t.x);
+		t.geoToCart();
 		forn(j,2)
 			Y[2*i+j]=t[j];
 	}
-	
+
 	ae_int_t info;
-	real_1d_array c;
 	lsfitreport rep;
 	lsfitlinear(Y,Z,info,X,rep);
 	if(info!=1){
@@ -74,39 +75,50 @@ int main(int argc, char *argv[]){
 	}
 
 	int W=inImage->width(), H=inImage->height();
-	point<LD> *B=new point<LD>[W*H];
 	outImage=new QImage(W,H,QImage::Format_RGB32);
 
 	LD MinX=INF, MinY=INF, MaxX=-INF, MaxY=-INF;
-	int pos=0;
-	point<LD> t1,t2;
+	point<LD> t;
 	forn(y,H)
 		forn(x,W){
-			t1=point<LD>(x,y);
-			t2=st+point<LD>(t1^v,t1*v);
-			t2=rectangularToGeographical(point<LD>(-t2.y,t2.x),zone);
-			t2.x=degToRad(t2.x), t2.y=degToRad(t2.y);
-			B[pos]=point<LD>(t2.y,arctanh(sin(t2.x))-eps*arctanh(eps*sin(t2.x)));
-
-			MinX=min(MinX,B[pos].x), MaxX=max(MaxX,B[pos].x);
-			MinY=min(MinY,B[pos].y), MaxY=max(MaxY,B[pos].y);
-			++pos;
+			t=point<LD>(x,y);
+			t=st+point<LD>(t^v,t*v);
+			t.cartToGeo();
+			t=rectangularToGeographical(t,zone);
+			forn(i,2)
+				t[i]=degToRad(t[i]);
+			t=point<LD>(t.y,arctanh(sin(t.x))-eps*arctanh(eps*sin(t.x)));
+			MinX=min(MinX,t.x), MaxX=max(MaxX,t.x);
+			MinY=min(MinY,t.y), MaxY=max(MaxY,t.y);
 		}
-	LD Scale=min((W-1)/(MaxX-MinX),(H-1)/(MaxY-MinY));
-	LL a,b;
-	pos=0;
+
+
+	point<LD> v_rev=point<LD>(-v.x,v.y)/v.length2();
+	LD Scale=min((W-1)/(MaxX-MinX),(H-1)/(MaxY-MinY)),yt,theta;
+	int ix,iy;
 	forn(y,H)
 		forn(x,W){
-			a=(B[pos].x-MinX)*Scale, b=(MaxY-B[pos].y)*Scale;
-			outImage->setPixel(a,b,inImage->pixel(x,y));
-			++pos;
+			yt=MaxY-y/Scale, theta=atan(sinh(yt));
+			forn(i,ITERS_CNT)
+				theta=asin(1-(1+sin(theta))*pow(1-eps*sin(theta),eps)/(exp(2*yt)*pow(1+eps*sin(theta),eps)));
+			t=point<LD>(theta,MinX+x/Scale);
+			forn(i,2)
+				t[i]=radToDeg(t[i]);
+			t=geographicalToRectangular(t,zone);
+			t.geoToCart();
+			t=t-st;
+			t=point<LD>(t^v_rev,t*v_rev);
+			ix=(int)t.x, iy=(int)t.y;
+			if(inImage->valid(ix,iy))
+				outImage->setPixel(x,y,inImage->pixel(ix,iy));
 		}
 
 	srand(time(NULL));
 	char TempName[30];
 	sprintf(TempName,"temp%d.jpg",rand());
-	strcpy(strrchr(ImageName,'.'),"-out.jpg");	
+	strcpy(strrchr(ImageName,'.'),"-out.jpg");
 	outImage->save(TempName);
+	remove(ImageName);
 	rename(TempName,ImageName);
 
 	return 0;

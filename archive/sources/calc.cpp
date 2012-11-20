@@ -1,31 +1,20 @@
 #include "all.h"
+#include "calc.h"
 
-static LD A = 6378245.0;
-static LD E2 = 0.0066934216;
-static LD E12 = E2 / (1 - E2);
-static LD E1 = (1 - sqrt(1 - E2)) / (1 + sqrt(1 - E2));
-static LD FALSENORTHING = 0;
-static LD FALSEEASTING = 500000;
-static LD SCALEFACTOR = 1;
+LD A = 6378245.0;
+LD E2 = 0.0066934216;
+LD E12 = E2 / (1 - E2);
+LD E1 = (1 - sqrt(1 - E2)) / (1 + sqrt(1 - E2));
+LD FALSENORTHING = 0;
+LD FALSEEASTING = 500000;
+LD SCALEFACTOR = 1;
 
-LD degToRad(LD x){
-	return x*M_PI/180;
-}
-
-LD radToDeg(LD x){
-	return x*180/M_PI;
-}
-
-static inline LD foo(LD f0){
+inline LD foo(LD f0){
 	LD z=(1-E2/4-3*pow(E2,2)/64-5*pow(E2,3)/256)*f0;
 	z-=(3*E2/8+3*pow(E2,2)/32+45*pow(E2,3)/1024)*sin(2*f0);
 	z+=(15*pow(E2,2)/256+45*pow(E2,3)/1024)*sin(4*f0);
 	z-=(35*pow(E2,3)/3072)*sin(6*f0);
 	return z;
-}
-
-LD lonToZone(LD lon){
-	return ceil(lon/6);
 }
 
 point<LD> geographicalToRectangular(point<LD> P,LD zone){

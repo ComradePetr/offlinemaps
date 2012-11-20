@@ -47,9 +47,17 @@ struct point{
 	LD length(){
 		return sqrt(x*x+y*y);
 	}
+	
 	T& operator[](const int &k){
 		return k?y:x;
 	}
+
+	inline void cartToGeo(){
+		swap(x,y), x*=-1;
+	}
+	inline void geoToCart(){
+		swap(x,y), y*=-1;
+	}	
 };
 
 template<class T>
