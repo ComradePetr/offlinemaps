@@ -1,0 +1,20 @@
+OziExplorer Map Data File Version 2.2
+O-29-out-scaled-
+O-29-out-scaled-
+1 ,Map Code,
+Pulkovo 1942 (2),WGS 84,   0.0000,   0.0000,WGS 84
+Reserved 1
+Reserved 2
+Magnetic Variation,,,E
+Map Projection,Mercator,PolyCal,No,AutoCalOnly,No,BSBUseWPX,No
+
+Point01,xy,   1061,   619,in, deg,  60, 0.0000000000,N, 12, 0.0000000000,E, grid,   ,           ,           ,N
+Point02,xy,   6300,   627,in, deg,  60, 0.0000000000,N, 6, 0.0000000000,E, grid,   ,           ,           ,N
+Point03,xy,   6302,   7198,in, deg,  56, 0.0000000000,N, 6, 0.0000000000,E, grid,   ,           ,           ,N
+Point04,xy,   1059,   7206,in, deg,  56, 0.0000000000,N, 12, 0.0000000000,E, grid,   ,           ,           ,N
+Point05,xy,   3685,   4007,in, deg,  58, 0.0000000000,N, 9, 0.0000000000,E, grid,   ,           ,           ,N
+Point06,xy,   3685,   623,in, deg,  60, 0.0000000000,N, 9, 0.0000000000,E, grid,   ,           ,           ,N
+Point07,xy,   1061,   4005,in, deg,  58, 0.0000000000,N, 12, 0.0000000000,E, grid,   ,           ,           ,N
+Point08,xy,   6298,   4009,in, deg,  58, 0.0000000000,N, 6, 0.0000000000,E, grid,   ,           ,           ,N
+Point09,xy,   3689,   7202,in, deg,  56, 0.0000000000,N, 9, 0.0000000000,E, grid,   ,           ,           ,N
+Point10,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point11,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point12,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point13,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point14,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point15,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point16,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point17,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point18,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point19,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point20,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point21,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point22,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point23,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point24,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point25,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point26,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point27,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point28,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point29,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,Point30,xy,     ,     ,in, deg,    ,        ,,    ,        ,, grid,   ,           ,           ,

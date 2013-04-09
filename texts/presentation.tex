@@ -1,0 +1,63 @@
+\documentclass{beamer}
+\mode<presentation>
+\usepackage[english,russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usetheme{Warsaw}
+
+\parindent=8pt
+
+\usepackage{ragged2e}
+\justifying
+\renewcommand{\raggedright}{\leftskip=0pt \rightskip=0pt plus 0cm}
+
+\setbeamercovered{transparent}
+
+\begin{document}
+
+\title[Подготовка растровых картографических данных]{Подготовка растровых картографических данных к использованию в стандартизированных навигационных и геоинформационных системах}
+\author{Пётр Смирнов, Даниил Клюев}
+\institute{ГБОУ Физико-математический лицей №239\\
+Центрального района Санкт-Петербурга\\
+Научный руководитель: Чихачёв Кирилл Борисович}
+\date{Апрель 2013}
+
+\frame{\titlepage}
+
+\begin{frame}{Описание проблемы}
+Территория России представлена советскими топографическими картами в проекции Гаусса-Крюгера "--- нельзя <<склеить>> по углу.
+\end{frame}
+
+\begin{frame}{Проекция Гаусса-Крюгера}
+Описание проекции
+\end{frame}
+
+\begin{frame}{Проекция Меркатора}
+Описание проекции
+\end{frame}
+
+\begin{frame}{map-файл}
+Описание map-файла
+\end{frame}
+
+\begin{frame}{Постановка задачи}
+\begin{enumerate}
+\item Перепроецирование карты из проекции Гаусса-Крюгера в проекцию Меркатора по имеющейся информации о нескольких точках (уточнить?)
+\pause
+\item Масштабирование и разбивка на тайлы (которые затем можно использовать)
+\pause
+\item Создание новых map-файлов
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Сферический список литературы в вакууме}
+ \begin{thebibliography}{10}
+\beamertemplatebookbibitems
+\bibitem{LurkHorse}
+{\sc Lurkmore}, {\em Сферический конь в вакууме}.
+\bibitem{AbsHorse}
+{\sc Абсурдопедия}, {\em Сферический конь в вакууме}.
+\end{thebibliography}
+\end{frame}
+
+\end{document}
